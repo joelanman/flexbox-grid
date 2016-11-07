@@ -1,3 +1,6 @@
+
+// getPosition from https://www.kirupa.com/html5/get_element_position_using_javascript.htm
+
 function getPosition (el) {
   var xPos = 0
   var yPos = 0
@@ -24,6 +27,8 @@ function getPosition (el) {
   }
 }
 
+// initialise flexboxGrid
+
 function flexboxGrid (parentId, childClass) {
   window.addEventListener('resize', function () {
     addSpacers(parentId, childClass)
@@ -31,6 +36,8 @@ function flexboxGrid (parentId, childClass) {
 
   addSpacers(parentId, childClass)
 }
+
+// calculate number of elements in last two rows and add spacer elements
 
 function addSpacers (parentId, childClass) {
   var spacers = document.getElementsByClassName('flexbox-grid-spacer')
@@ -81,5 +88,3 @@ function addSpacers (parentId, childClass) {
 
   document.getElementById(parentId).appendChild(docFrag)
 }
-
-flexboxGrid('files', 'file')
