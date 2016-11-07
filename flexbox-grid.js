@@ -1,9 +1,9 @@
-function getPosition(el) {
+function getPosition (el) {
   var xPos = 0
   var yPos = 0
 
   while (el) {
-    if (el.tagName == "BODY") {
+    if (el.tagName === 'BODY') {
       // deal with browser quirks with body/window/document and page scroll
       var xScroll = el.scrollLeft || document.documentElement.scrollLeft
       var yScroll = el.scrollTop || document.documentElement.scrollTop
@@ -21,30 +21,26 @@ function getPosition(el) {
   return {
     x: xPos,
     y: yPos
-  };
+  }
 }
 
-function flexboxGrid(parentId, childClass){
-
-  window.addEventListener("resize", function(){
+function flexboxGrid (parentId, childClass) {
+  window.addEventListener('resize', function () {
     addSpacers(parentId, childClass)
   })
 
   addSpacers(parentId, childClass)
 }
 
-function addSpacers(parentId, childClass){
-
+function addSpacers (parentId, childClass) {
   var spacers = document.getElementsByClassName('flexbox-grid-spacer')
 
-  if (spacers.length > 0){
-
+  if (spacers.length > 0) {
     var parent = spacers[0].parentNode
 
-    while(spacers.length > 0){
+    while (spacers.length > 0) {
       parent.removeChild(spacers[0])
     }
-
   }
 
   var files = document.querySelectorAll('.' + childClass)
@@ -54,39 +50,36 @@ function addSpacers(parentId, childClass){
   var currentRow = 0
   var currentTop = null
 
-  while (currentRow < 2 && files.length > 0){
-
+  while (currentRow < 2 && files.length > 0) {
     var el = files.pop()
     var elTop = getPosition(el).y
 
-    if (currentTop != null && currentTop != elTop){
+    if (currentTop !== null && currentTop !== elTop) {
       currentRow += 1
     }
 
-    if (rowTotals[currentRow] == undefined){
+    if (rowTotals[currentRow] === undefined) {
       rowTotals[currentRow] = 1
     } else {
       rowTotals[currentRow] += 1
     }
 
     currentTop = elTop
-
   }
 
-  //- console.log(rowTotals)
+  // - console.log(rowTotals)
 
   var difference = rowTotals[1] - rowTotals[0]
 
-  var docFrag = document.createDocumentFragment();
+  var docFrag = document.createDocumentFragment()
 
   for (var i = 0; i < difference; i++) {
     var spacer = document.createElement('div')
-    spacer.classList.add(childClass,'flexbox-grid-spacer')
+    spacer.classList.add(childClass, 'flexbox-grid-spacer')
     docFrag.appendChild(spacer)
   }
 
   document.getElementById(parentId).appendChild(docFrag)
-
 }
 
-flexboxGrid('files','file')
+flexboxGrid('files', 'file')
