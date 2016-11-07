@@ -30,6 +30,9 @@ function getPosition (el) {
 // initialise flexboxGrid
 
 function flexboxGrid (parentId, childClass) {
+  parentId = (parentId === undefined) ? 'flexbox-grid' : parentId
+  childClass = (childClass === undefined) ? 'flexbox-grid-item' : childClass
+
   window.addEventListener('resize', function () {
     addSpacers(parentId, childClass)
   })
